@@ -1,0 +1,7 @@
+app:
+  port: null
+  namespace: null
+database:
+  host: null
+  port: null
+  password: null
