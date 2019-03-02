@@ -26,6 +26,7 @@ describe('StealCaseDao suite', () => {
             ownerName: 'Elon Musk',
             licenseNumber: 'EM-19710628',
             color: 'red',
+            district: 1,
             stealDetails: 'Stolen right at the backyard of Tesla HQ',
             type: BikeType.Hybrid,
         };
@@ -35,18 +36,20 @@ describe('StealCaseDao suite', () => {
         expect(connectionPrototype.query).toBeCalledTimes(1);
         expect(connectionPrototype.query.mock.calls[0][0]).toBe(
             'INSERT INTO steal_cases('
-                + 'ownerName,'
-                + 'licenseNumber,'
+                + 'owner_name,'
+                + 'license_number,'
                 + 'color,'
-                + 'stealDetails,'
+                + 'district,'
+                + 'steal_details,'
                 + 'type,'
-                + 'dateCreated,'
+                + 'date_created,'
                 + 'status'
             + ') '
             + 'VALUES ('
                 + `'${data.ownerName}',`
                 + `'${data.licenseNumber}',`
                 + `'${data.color}',`
+                + `'${data.district}',`
                 + `'${data.stealDetails}',`
                 + `'${data.type}',`
                 + `'${moment().format('YYYY-MM-DD HH:mm:ss')}',`

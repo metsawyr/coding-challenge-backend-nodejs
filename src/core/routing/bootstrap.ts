@@ -101,12 +101,7 @@ import { EndpointInstance, RouterInstance, RouterMethod, routerRegistry } from '
     app.use(
         (error: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
             if (error) {
-                // if (error instanceof AppError) {
-                //     res.status(error.code).json({ error: error.message });
-                // }
-                // else {
-                    res.status(500).json(error);
-                // }
+                res.status(500).send(error.message);
             }
             next();
         }

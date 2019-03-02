@@ -17,6 +17,7 @@ export function Validation(scheme: Joi.SchemaLike) {
 
             next();
         };
+        
         middleware.handlers.push({
             functionName: name,
         });

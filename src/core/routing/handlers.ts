@@ -12,7 +12,7 @@ export function Request() {
 }
 
 export function Body(name?: string) {
-    return Argument('req.body' + name ? `.${name}` : '');
+    return Argument('req.body' + (name ? `.${name}` : ''));
 }
 
 export function Params(name: string) {

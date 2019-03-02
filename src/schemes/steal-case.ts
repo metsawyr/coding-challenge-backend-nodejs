@@ -1,8 +1,11 @@
-export interface StealCaseScheme {
+import { Scheme } from './_base';
+
+export interface StealCaseScheme extends Scheme {
     ownerName: string;
     licenseNumber: string;
     color: string;
     type: BikeType;
+    district: number;
     stealDetails: string;
     officer: number;
     dateCreated: string;
