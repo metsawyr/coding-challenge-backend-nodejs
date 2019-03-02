@@ -3,6 +3,7 @@
 
 ## Implementation detail and lacks
 - Unit testing present only in one class, so you can see the way how it's usually done by me.
+- My Azure subscription suspended, so I can't deploy an application
 
 ## Product Requirements
 - [x] Bike owners can report a stolen bike.
