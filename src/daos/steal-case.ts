@@ -65,4 +65,18 @@ export class StealCaseDao extends Dao<StealCaseScheme> {
             }
         );
     }
+
+    public async filterCases(filters: Partial<StealCaseScheme & { department: number }>) {
+        const where = this.transformObjectToPairs(filters, { $default: 't1', department: 't2' });
+
+        const { results } = await this.query(
+            `SELECT t1.*, t2.name as officer_name, t2.department, t3.name as department_name `
+            + `FROM ${this.tableName} t1 `
+            + `LEFT JOIN officers t2 ON t1.officer = t2.id `
+            + `LEFT JOIN departments t3 ON t2.department = t3.id`
+            + (where.length ? ` WHERE ${where.join(' AND ')}` : '')
+        );
+
+        return results;
+    }
 }

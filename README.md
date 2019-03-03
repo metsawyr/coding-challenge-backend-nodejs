@@ -11,7 +11,7 @@
 - [x] Police have multiple departments that are responsible for stolen bikes. 
 - [x] A department can have some amount of police officers who can work on stolen bike cases.
 - [x] The Police can scale their number of departments, and can increase the number of police officers per department.
-- [ ] Each police officer should be able to search bikes by different characteristics in a database and see which department is responsible for a stolen bike case.
+- [x] Each police officer should be able to search bikes by different characteristics in a database and see which department is responsible for a stolen bike case.
 - [x] New stolen bike cases should be automatically assigned to any free police officer in any department.  
 - [x] A police officer can only handle one stolen bike case at a time. 
 - [x] When the Police find a bike, the case is marked as resolved and the responsible police officer becomes available to take a new stolen bike case. 
@@ -56,15 +56,14 @@ Payload:
 }
 ```
 
-## NOT IMPLEMENTED!
-
 `GET /cases` - get cases list
 Query params:
 ```
     ownerName: string,
     licenseNumber: string,
     color: string,
-    district: number,
     type: string enum,
+    officer: number,
     status: string enum,
+    department: number
 ```

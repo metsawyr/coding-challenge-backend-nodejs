@@ -11,6 +11,10 @@ interface UpdateCodes<T> {
 
 export type UpdateQuery<T> = Partial<T> & Partial<UpdateCodes<T>>;
 
+export interface TransformationPrefixes extends Dictionary<string> {
+    $default?: string;
+}
+
 export abstract class Dao<T extends Scheme> {
     public abstract tableName: string;
     private $connection: Connection;
@@ -83,15 +87,32 @@ export abstract class Dao<T extends Scheme> {
         });
     }
 
-    protected transformObjectToPairs(target: Dictionary): Array<string> {
+    protected transformObjectToPairs(
+        target: Dictionary,
+        prefixes: TransformationPrefixes = {}
+    ): Array<string> {
+        Object.entries(target)
+            .reduce(
+                (result, [key, value]) => {
+                    if (prefixes.hasOwnProperty(key)) {
+                        key = `${prefixes[key]}.${key}`;
+                    }
+                    else if (prefixes.hasOwnProperty('$default')) {
+                        key = `${prefixes.$default}.${key}`;
+                    }
+
+                    result[key] = value;
+                    return result;
+                },
+                {} as Dictionary
+            );
+
         return Object.entries(target)
             .reduce(
                 (result, [key, value]) => {
                     if (key === '$inc') {
                         result.push(
-                            ...Object.entries(value).map(
-                                ([incKey, incValue]) => `${incKey} = ${incKey} + ${incValue}`
-                            )
+                            ...this.transformObjectToPairs(value, prefixes)
                         );
                     }
                     else {

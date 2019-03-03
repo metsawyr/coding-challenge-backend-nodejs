@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '../core/injector';
 import { StealCaseCreateRequest, StealCaseDao } from '../daos/steal-case';
-import { CaseStatus } from '../schemes/steal-case';
+import { CaseStatus, StealCaseScheme } from '../schemes/steal-case';
 import { Events, EventService } from './event';
 
 @Injectable()
@@ -37,5 +37,9 @@ export class StealCaseService {
             resolutionReport
         );
         this.eventService.emit(Events.CaseClosed, caseId);
+    }
+
+    public async filterCases(filters: Partial<StealCaseScheme & { departnemt: number}>) {
+        return this.stealCaseDao.filterCases(filters);
     }
 }

@@ -19,8 +19,8 @@ export function Params(name: string) {
     return Argument(`req.params.${name}`);
 }
 
-export function Query(name: string) {
-    return Argument(`req.query.${name}`);
+export function Query(name?: string) {
+    return Argument(`req.query` + (name ? `.${name}` : ''));
 }
 
 export function Headers(name: string) {
